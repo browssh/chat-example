@@ -45,7 +45,7 @@ conn
         })
         .on("data", function(data) {
           //   outputmsg += data;
-          //   console.log("STDOUT: " + outputmsg);
+            console.log("STDOUT: " + data);
           io.emit("sshresponse", `${data}`);
         })
         .stderr.on("data", function(data) {
@@ -54,7 +54,7 @@ conn
           io.emit("sshresponse", `${data}`);
         });
 
-      sshshell.write("ls\n");
+      // sshshell.write("ls\n");
     });
   })
   .connect(clientCreds);

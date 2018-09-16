@@ -72,7 +72,7 @@
 
                 e.preventDefault();
 
-                socket.emit('clientcmd', $('#m').val());
+                socket.emit('clientcmd', $('#m-input').val());
                 $("#m-input").val('');
 
                 return false;
