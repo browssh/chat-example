@@ -45,7 +45,7 @@ conn
         })
         .on("data", function(data) {
           //   outputmsg += data;
-            console.log("STDOUT: " + data);
+            // console.log("STDOUT: " + data);
           io.emit("sshresponse", `${data}`);
         })
         .stderr.on("data", function(data) {
@@ -63,7 +63,7 @@ conn
  * HTTP SERVER.
  */
 app.get("/", (req, res) => {
-  res.sendFile(__dirname + "/index.html");
+  res.sendFile(__dirname + "/public/index.html");
 });
 
 http.listen(3000, () => {
