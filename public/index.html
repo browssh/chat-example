@@ -4,6 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Socket.IO chat</title>
+    <link rel="stylesheet" href="node_modules/xterm/dist/xterm.css" />
+    <script src="node_modules/xterm/dist/xterm.js"></script>
     <style>
         * {
             margin: 0;
@@ -53,17 +55,30 @@
         #messages div:nth-child(odd) {
             background: #eee;
         }
+        #terminal {
+            position: fixed;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+        }
     </style>
 </head>
 
 <body>
-    <div id="messages">
+    <div id="terminal"></div>
+    <!-- <div id="messages">
     </div>
+-->
     <form action="">
         <input id="m-input" autocomplete="off" /> <button>Send</button>
-    </form>
+    </form> 
     <script src="/socket.io/socket.io.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script>
+        var term = new Terminal();
+        term.open(document.getElementById('terminal'));
+    </script>
     <script>
         $(() => {
             var socket = io();
@@ -80,15 +95,16 @@
 
 
             socket.on('sshresponse', (msg) => {
-                var msglist = document.getElementById("messages");
+                term.write(msg);
+                // var msglist = document.getElementById("messages");
 
-                var newmsgContainer = document.createElement("div");
-                var newMsg = document.createTextNode(msg);
-                newmsgContainer.appendChild(newMsg);
+                // var newmsgContainer = document.createElement("div");
+                // var newMsg = document.createTextNode(msg);
+                // newmsgContainer.appendChild(newMsg);
 
-                msglist.appendChild(newmsgContainer);
+                // msglist.appendChild(newmsgContainer);
 
-                newmsgContainer.scrollIntoView();
+                // newmsgContainer.scrollIntoView();
             });
         });
     </script>
